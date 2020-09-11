@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.imeng.web.mapper.MenuMapper">
+    <select id="findList" resultType="com.imeng.common.model.Menu">
+        select * from sys_menu t
+    </select>
+
+    <select id="findMenusByRoleIds" resultType="com.imeng.common.model.Menu">
+        select distinct t.* from sys_menu t
+        inner join sys_role_menu r on r.menu_id = t.id and r.del_flag=0
+        where
+        r.role_id in
+        <foreach collection="roleIds" index="index" item="roleId"
+                 open="(" separator="," close=")">
+            #{roleId}
+        </foreach>
+        <if test="type != null">
+            and t.type = #{type}
+        </if>
+        <if test="hidden!=null">
+            and t.hidden = #{hidden}
+        </if>
+        <if test="delFlag!=null">
+            and t.del_flag = #{delFlag}
+        </if>
+        ORDER BY sort ASC
+    </select>
+
+    <!--按角色查询权限-->
+    <select id="findByRoleId" resultType="com.imeng.common.model.Menu" >
+        select distinct t.*,IF(ISNULL(r.id),0,1) as checked from sys_menu t
+        left join (
+        select * from sys_role_menu
+        where
+        del_flag=0
+        <if test="roleId!=null">
+            and role_id =#{roleId}
+        </if>
+
+        )  r on r.menu_id = t.id
+        where
+        1=1
+        <if test="type != null">
+            and t.type = #{type}
+        </if>
+        <if test="hidden!=null">
+            and t.hidden = #{hidden}
+        </if>
+        <if test="delFlag!=null">
+            and t.del_flag = #{delFlag}
+        </if>
+        ORDER BY sort ASC
+    </select>
+    <select id="findMenusByRoleCodes" resultType="com.imeng.common.model.Menu">
+        select distinct t.* from sys_menu t
+        inner join sys_role_menu r on r.menu_id = t.id and r.del_flag=0
+        inner join sys_role rl on rl.id = r.role_id
+        where
+        rl.code in
+        <foreach collection="roleCodes" index="index" item="roleCode"
+                 open="(" separator="," close=")">
+            #{roleCode}
+        </foreach>
+        <if test="type != null">
+            and t.type = #{type}
+        </if>
+        <if test="hidden!=null">
+            and t.hidden = #{hidden}
+        </if>
+        <if test="delFlag!=null">
+            and t.del_flag = #{delFlag}
+        </if>
+        and t.hidden = 0
+        ORDER BY sort ASC
+    </select>
+</mapper>

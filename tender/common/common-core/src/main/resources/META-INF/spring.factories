@@ -1,0 +1,4 @@
+org.springframework.context.ApplicationContextInitializer=\
+com.imeng.common.config.BannerInitializer
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.imeng.common.CommonAutoConfig

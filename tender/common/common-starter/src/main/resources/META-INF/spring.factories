@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.imeng.common.filter.TenantFilter,\
+com.imeng.common.filter.UserFilter

@@ -1,0 +1,6 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.imeng.auth.config.SecurityPropertiesConfig,\
+com.imeng.auth.store.AuthDbTokenStore,\
+com.imeng.auth.store.AuthRedisTokenStore,\
+com.imeng.auth.store.AuthJwtTokenStore,\
+com.imeng.auth.store.ResJwtTokenStore

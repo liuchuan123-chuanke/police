@@ -1,0 +1,13 @@
+*.zip
+*.log
+*.iml
+.idea/
+web/src/main/resource/templates/front/node_modules/
+common/auth-starter/target/
+web/target/
+common/knife4j-starter/target/
+common/common-core/target/
+common/common-starter/target/
+common/db-starter/target/
+common/redis-starter/target/
+*.tmp

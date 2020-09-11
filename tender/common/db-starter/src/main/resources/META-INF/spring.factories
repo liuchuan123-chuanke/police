@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.imeng.db.config.TenantAutoConfigure,\
+com.imeng.db.config.DateMetaObjectHandler
